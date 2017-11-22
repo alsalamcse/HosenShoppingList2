@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "412895384070",
+    "firebase_url": "https://hosenshoppinglist-aff15.firebaseio.com",
+    "project_id": "hosenshoppinglist-aff15",
+    "storage_bucket": "hosenshoppinglist-aff15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412895384070:android:5648776f7fc1dbf6",
+        "android_client_info": {
+          "package_name": "com.badran.aodai.hosenlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412895384070-abo62989lmquvl3itp32ip85258j238m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.badran.aodai.hosenlist",
+            "certificate_hash": "013f43c9a5d380c46de43c04644418dbe5d2a253"
+          }
+        },
+        {
+          "client_id": "412895384070-jjge86s9d8a01n2dap4bm266vo7qm4tb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG5vlKSyC4BahNWwFEY7SNmkBzxGQiYiI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412895384070-jjge86s9d8a01n2dap4bm266vo7qm4tb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

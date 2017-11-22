@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="ETpassword" type="id" />
+    <item name="ETmail" type="id" />
+    <item name="LWitem" type="id">List of Items</item>
+</resources>
