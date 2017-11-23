@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AddItem extends AppCompatActivity {;
+public class AddItem extends AppCompatActivity implements View.OnClickListener {;
     private EditText etName;
     private EditText etAmount;
     private EditText etUnits;
@@ -36,16 +36,7 @@ public class AddItem extends AppCompatActivity {;
         ETprice = (EditText) findViewById(R.id.ETprice);
         BTNSave = (Button) findViewById(R.id.BTNSave);
         iBTNimage = (ImageView) findViewById(R.id.iBTNimage);
-
-        BTNSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dataHandler();
-
-            }
-        });
-
-
+        BTNSave.setOnClickListener(this);
 
 
     }
@@ -61,19 +52,21 @@ public class AddItem extends AppCompatActivity {;
         double price= Double.parseDouble(stPrice);
 
         Product p= new Product();
-        p.setName(etName);
+        p.setName(stname);
         p.setAmount(amount);
         p.setPrice(price);
-        p.setCompleted(false);
-        DatabaseReference reference;
-        reference= FirebaseDatabase.getInstance().getReference();
+        p.setCompeleted(false);
 
         FirebaseAuth auth=FirebaseAuth.getInstance();
         FirebaseUser user=auth.getCurrentUser();
         String email=user.getEmail();
         email=email.replace('.','*');
 
-        reference.child(email).child("my list").push().setValue(p).addOnCompleteListener(this, new OnCompleteListener<Void>() {
+        DatabaseReference reference;
+        reference= FirebaseDatabase.getInstance().getReference();
+
+
+        reference.child(email).child("mylist").push().setValue(p).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -89,10 +82,15 @@ public class AddItem extends AppCompatActivity {;
         });
 
 
+
         //reference.child("list").setValue("koko");
 
     }
 
+    @Override
+    public void onClick(View view) {
+        dataHandler();
+    }
 }
 
 

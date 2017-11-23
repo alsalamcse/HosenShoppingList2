@@ -16,12 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/BTNsave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/save" />
-
             <EditText
                 android:id="@+id/ETname"
                 android:layout_width="match_parent"
@@ -59,6 +53,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/ic_launcher" />
+
+            <Button
+                android:id="@+id/BTNSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="@string/save" />
 
         </LinearLayout>
     </ScrollView>
