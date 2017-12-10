@@ -3,6 +3,7 @@ package com.badran.aodai.hosenlist.mainlistfragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.badran.aodai.hosenlist.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,10 +50,49 @@ public class CurrentFragment extends Fragment {
         LSVCurrent=(ListView) view.findViewById(R.id.LSTVCurrent);
 
         String []ar={"stam1","stam2","stam3"};
-        //ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,)
+        //ArrayAdapter<String> arrayAdapter=
+        // new ArrayAdapter<String>(this,)
+
+
+
+        readAndListen();
 
         //4.
         return view;
     }
+
+
+    //read and listen data from database
+    private void readAndListen()
+    {
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        FirebaseUser user=auth.getCurrentUser();
+        String email=user.getEmail();
+        email=email.replace('.','*');
+        DatabaseReference reference;
+        reference= FirebaseDatabase.getInstance().getReference();
+        reference.child(email).child("mylist").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot ds:dataSnapshot.getChildren())
+                        {
+                           Product pd=ds.getValue(Product.class);
+                            Log.d("SL", pd.toString());
+                        }
+
+                    }
+
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+
 
 }
