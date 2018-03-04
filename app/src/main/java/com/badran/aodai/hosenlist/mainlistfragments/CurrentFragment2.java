@@ -3,6 +3,7 @@ package com.badran.aodai.hosenlist.mainlistfragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CurrentFragment extends Fragment {
+public class CurrentFragment2 extends Fragment {
+
+
     private TextView TVTotal;
     private TextView TVTotalValue;
     private TextView TVCount;
@@ -31,8 +34,10 @@ public class CurrentFragment extends Fragment {
     private ImageButton IMBSAVE;
     private ListView LSVCurrent;
 
+    private ProductAdapter productAdapter;
 
-    public CurrentFragment() {
+
+    public CurrentFragment2() {
         // Required empty public constructor
     }
 
@@ -41,17 +46,13 @@ public class CurrentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_current, container, false);
-        TVTotal=(TextView) view.findViewById(R.id.TVTotal);
-        TVTotalValue=(TextView) view.findViewById(R.id.TVTotalValue);
-        TVCount=(TextView) view.findViewById(R.id.TVCount);
-        TVCountValue=(TextView) view.findViewById(R.id.TVCountValue);
-        IMBSAVE=(ImageButton) view.findViewById(R.id.IMBSAVE);
-        LSVCurrent=(ListView) view.findViewById(R.id.LSTVCurrent);
-
-        String []ar={"stam1","stam2","stam3"};
-        //ArrayAdapter<String> arrayAdapter=
-        // new ArrayAdapter<String>(this,)
+        View view = inflater.inflate(R.layout.fragment_current, container, false);
+        TVTotal = (TextView) view.findViewById(R.id.TVTotal);
+        TVTotalValue = (TextView) view.findViewById(R.id.TVTotalValue);
+        TVCount = (TextView) view.findViewById(R.id.TVCount);
+        TVCountValue = (TextView) view.findViewById(R.id.TVCountValue);
+        IMBSAVE = (ImageButton) view.findViewById(R.id.IMBSAVE);
+        LSVCurrent = (ListView) view.findViewById(R.id.LSTVCurrent);
 
 
 
@@ -63,27 +64,25 @@ public class CurrentFragment extends Fragment {
 
 
     //read and listen data from database
-    private void readAndListen()
-    {
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        FirebaseUser user=auth.getCurrentUser();
-        String email=user.getEmail();
-        email=email.replace('.','*');
+    private void readAndListen() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        String email = user.getEmail();
+        email = email.replace('.', '*');
         DatabaseReference reference;
-        reference= FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference();
         reference.child(email).child("mylist").
                 addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot)
-                    {
-                        for (DataSnapshot ds:dataSnapshot.getChildren())
-                        {
-                           Product pd=ds.getValue(Product.class);
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       productAdapter.clear();
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Product pd = ds.getValue(Product.class);
                             Log.d("SL", pd.toString());
+                            productAdapter.add(p);
                         }
 
                     }
-
 
 
                     @Override
@@ -92,7 +91,5 @@ public class CurrentFragment extends Fragment {
                     }
                 });
     }
-
-
 
 }
